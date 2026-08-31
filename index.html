@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DSCVPS - High Performance VPS Hosting</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <i class="fas fa-server"></i>
+        <span>DSC<b>VPS</b></span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#plans">Plans</a></li>
+        <li><a href="#specs">Specs</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="login.html" class="btn btn-outline">Login</a>
+        <a href="join.html" class="btn btn-primary">Get Started</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+      <div class="particles" id="particles"></div>
+    </div>
+    <div class="hero-content">
+      <div class="badge"><i class="fas fa-bolt"></i> 99.9% Uptime SLA</div>
+      <h1>Blazing Fast <span class="gradient-text">VPS Hosting</span><br />Built for Professionals</h1>
+      <p>Deploy your virtual private server in under 60 seconds. NVMe SSD storage, DDoS protection, and 24/7 expert support — all in one platform.</p>
+      <div class="hero-actions">
+        <a href="#plans" class="btn btn-primary btn-lg">View Plans <i class="fas fa-arrow-right"></i></a>
+        <a href="#features" class="btn btn-ghost btn-lg"><i class="fas fa-play-circle"></i> Learn More</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num" data-target="50000">0</span><span>+</span><p>Servers Deployed</p></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" data-target="99">0</span><span>.9%</span><p>Uptime Guarantee</p></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" data-target="24">0</span><span>/7</span><p>Expert Support</p></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" data-target="15">0</span><span>+</span><p>Global Locations</p></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="server-card floating">
+        <div class="server-card-header">
+          <span class="status-dot active"></span>
+          <span>VPS-PRO-001</span>
+          <span class="server-badge">LIVE</span>
+        </div>
+        <div class="server-metrics">
+          <div class="metric">
+            <span>CPU</span>
+            <div class="bar-wrap"><div class="bar" style="--w:72%"></div></div>
+            <span>72%</span>
+          </div>
+          <div class="metric">
+            <span>RAM</span>
+            <div class="bar-wrap"><div class="bar ram" style="--w:45%"></div></div>
+            <span>45%</span>
+          </div>
+          <div class="metric">
+            <span>DISK</span>
+            <div class="bar-wrap"><div class="bar disk" style="--w:58%"></div></div>
+            <span>58%</span>
+          </div>
+        </div>
+        <div class="server-footer">
+          <span><i class="fas fa-map-marker-alt"></i> Frankfurt, DE</span>
+          <span class="uptime-badge"><i class="fas fa-circle"></i> 99.99%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Why DSCVPS</div>
+        <h2>Everything You Need to <span class="gradient-text">Scale</span></h2>
+        <p>Enterprise-grade infrastructure at startup-friendly prices.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card" data-aos>
+          <div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div>
+          <h3>NVMe SSD Storage</h3>
+          <p>Up to 10x faster than traditional SSDs. Your applications load instantly with zero bottlenecks.</p>
+        </div>
+        <div class="feature-card" data-aos>
+          <div class="feature-icon purple"><i class="fas fa-shield-alt"></i></div>
+          <h3>DDoS Protection</h3>
+          <p>Always-on 1 Tbps DDoS mitigation keeps your services online even under heavy attack.</p>
+        </div>
+        <div class="feature-card" data-aos>
+          <div class="feature-icon green"><i class="fas fa-globe"></i></div>
+          <h3>15+ Global Locations</h3>
+          <p>Deploy close to your users across North America, Europe, Asia-Pacific, and beyond.</p>
+        </div>
+        <div class="feature-card" data-aos>
+          <div class="feature-icon orange"><i class="fas fa-sync-alt"></i></div>
+          <h3>Instant Deployment</h3>
+          <p>Go live in under 60 seconds with automated provisioning and one-click OS selection.</p>
+        </div>
+        <div class="feature-card" data-aos>
+          <div class="feature-icon red"><i class="fas fa-life-ring"></i></div>
+          <h3>24/7 Expert Support</h3>
+          <p>Real engineers — not bots — available around the clock via live chat, ticket, and phone.</p>
+        </div>
+        <div class="feature-card" data-aos>
+          <div class="feature-icon cyan"><i class="fas fa-copy"></i></div>
+          <h3>Daily Backups</h3>
+          <p>Automated snapshots and one-click restore give you full peace of mind over your data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section class="plans" id="plans">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Pricing</div>
+        <h2>Simple, <span class="gradient-text">Transparent</span> Plans</h2>
+        <p>No hidden fees. Scale up or down anytime.</p>
+      </div>
+      <div class="billing-toggle">
+        <span>Monthly</span>
+        <label class="toggle">
+          <input type="checkbox" id="billingToggle" />
+          <span class="slider"></span>
+        </label>
+        <span>Annual <span class="save-badge">Save 20%</span></span>
+      </div>
+      <div class="plans-grid">
+
+        <div class="plan-card" data-aos>
+          <div class="plan-header">
+            <div class="plan-icon"><i class="fas fa-seedling"></i></div>
+            <h3>Starter</h3>
+            <p>Perfect for personal projects and testing.</p>
+          </div>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount" data-monthly="5" data-annual="4">5</span>
+            <span class="period">/mo</span>
+          </div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check"></i> 1 vCPU Core</li>
+            <li><i class="fas fa-check"></i> 1 GB RAM</li>
+            <li><i class="fas fa-check"></i> 25 GB NVMe SSD</li>
+            <li><i class="fas fa-check"></i> 1 TB Bandwidth</li>
+            <li><i class="fas fa-check"></i> 1 IPv4 Address</li>
+            <li><i class="fas fa-check"></i> DDoS Protection</li>
+            <li class="disabled"><i class="fas fa-times"></i> Daily Backups</li>
+            <li class="disabled"><i class="fas fa-times"></i> Priority Support</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline w-full">Get Started</a>
+        </div>
+
+        <div class="plan-card popular" data-aos>
+          <div class="popular-badge"><i class="fas fa-fire"></i> Most Popular</div>
+          <div class="plan-header">
+            <div class="plan-icon"><i class="fas fa-rocket"></i></div>
+            <h3>Pro</h3>
+            <p>Ideal for growing apps and businesses.</p>
+          </div>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount" data-monthly="20" data-annual="16">20</span>
+            <span class="period">/mo</span>
+          </div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check"></i> 4 vCPU Cores</li>
+            <li><i class="fas fa-check"></i> 8 GB RAM</li>
+            <li><i class="fas fa-check"></i> 160 GB NVMe SSD</li>
+            <li><i class="fas fa-check"></i> 4 TB Bandwidth</li>
+            <li><i class="fas fa-check"></i> 2 IPv4 Addresses</li>
+            <li><i class="fas fa-check"></i> DDoS Protection</li>
+            <li><i class="fas fa-check"></i> Daily Backups</li>
+            <li class="disabled"><i class="fas fa-times"></i> Priority Support</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary w-full">Get Started</a>
+        </div>
+
+        <div class="plan-card" data-aos>
+          <div class="plan-header">
+            <div class="plan-icon"><i class="fas fa-crown"></i></div>
+            <h3>Business</h3>
+            <p>For high-traffic production workloads.</p>
+          </div>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount" data-monthly="60" data-annual="48">60</span>
+            <span class="period">/mo</span>
+          </div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check"></i> 8 vCPU Cores</li>
+            <li><i class="fas fa-check"></i> 32 GB RAM</li>
+            <li><i class="fas fa-check"></i> 400 GB NVMe SSD</li>
+            <li><i class="fas fa-check"></i> 8 TB Bandwidth</li>
+            <li><i class="fas fa-check"></i> 4 IPv4 Addresses</li>
+            <li><i class="fas fa-check"></i> DDoS Protection</li>
+            <li><i class="fas fa-check"></i> Daily Backups</li>
+            <li><i class="fas fa-check"></i> Priority Support</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline w-full">Get Started</a>
+        </div>
+
+        <div class="plan-card enterprise" data-aos>
+          <div class="plan-header">
+            <div class="plan-icon"><i class="fas fa-building"></i></div>
+            <h3>Enterprise</h3>
+            <p>Custom infrastructure for large-scale needs.</p>
+          </div>
+          <div class="plan-price enterprise-price">
+            <span>Custom</span>
+          </div>
+          <ul class="plan-features">
+            <li><i class="fas fa-check"></i> Dedicated vCPUs</li>
+            <li><i class="fas fa-check"></i> Up to 256 GB RAM</li>
+            <li><i class="fas fa-check"></i> Custom NVMe Storage</li>
+            <li><i class="fas fa-check"></i> Unmetered Bandwidth</li>
+            <li><i class="fas fa-check"></i> Multiple IPs</li>
+            <li><i class="fas fa-check"></i> Advanced DDoS</li>
+            <li><i class="fas fa-check"></i> Custom Backups</li>
+            <li><i class="fas fa-check"></i> Dedicated Manager</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary w-full">Contact Sales</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECS -->
+  <section class="specs" id="specs">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Infrastructure</div>
+        <h2>Built on <span class="gradient-text">World-Class</span> Hardware</h2>
+        <p>Our global network delivers unmatched performance and reliability.</p>
+      </div>
+      <div class="specs-grid">
+        <div class="spec-item" data-aos>
+          <i class="fas fa-microchip"></i>
+          <h4>AMD EPYC / Intel Xeon</h4>
+          <p>Latest generation processors with high clock speeds and optimized virtualization support.</p>
+        </div>
+        <div class="spec-item" data-aos>
+          <i class="fas fa-hdd"></i>
+          <h4>NVMe SSD RAID</h4>
+          <p>Enterprise NVMe SSDs in redundant RAID arrays delivering up to 3.5 GB/s sequential read speeds.</p>
+        </div>
+        <div class="spec-item" data-aos>
+          <i class="fas fa-network-wired"></i>
+          <h4>10 Gbps Network</h4>
+          <p>Redundant 10 Gbps uplinks with BGP routing ensure maximum throughput and low latency.</p>
+        </div>
+        <div class="spec-item" data-aos>
+          <i class="fas fa-lock"></i>
+          <h4>Tier III+ Data Centers</h4>
+          <p>ISO 27001 certified facilities with N+1 redundancy and 99.999% power uptime guarantees.</p>
+        </div>
+        <div class="spec-item" data-aos>
+          <i class="fas fa-code-branch"></i>
+          <h4>KVM Virtualization</h4>
+          <p>Full KVM virtualization gives you dedicated resources, true isolation, and root access.</p>
+        </div>
+        <div class="spec-item" data-aos>
+          <i class="fas fa-undo"></i>
+          <h4>Instant Snapshots</h4>
+          <p>Create server snapshots in seconds and restore to any point with a single click.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OS LOGOS -->
+  <section class="os-section">
+    <div class="container">
+      <p class="os-title">Deploy your favorite OS in one click</p>
+      <div class="os-logos">
+        <div class="os-item"><i class="fab fa-ubuntu"></i><span>Ubuntu</span></div>
+        <div class="os-item"><i class="fab fa-debian"></i><span>Debian</span></div>
+        <div class="os-item"><i class="fab fa-centos"></i><span>CentOS</span></div>
+        <div class="os-item"><i class="fab fa-fedora"></i><span>Fedora</span></div>
+        <div class="os-item"><i class="fab fa-windows"></i><span>Windows</span></div>
+        <div class="os-item"><i class="fab fa-freebsd"></i><span>FreeBSD</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Testimonials</div>
+        <h2>Trusted by <span class="gradient-text">Thousands</span> of Developers</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card" data-aos>
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"DSCVPS cut our server costs by 40% while doubling our performance. The NVMe storage is incredibly fast — our database queries run 3x faster."</p>
+          <div class="testimonial-author">
+            <div class="avatar">JR</div>
+            <div>
+              <strong>James Rodriguez</strong>
+              <span>CTO, TechFlow Inc.</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos>
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Setup took less than 2 minutes. Support answered my question at 3am within minutes. Absolutely stellar service — couldn't ask for more."</p>
+          <div class="testimonial-author">
+            <div class="avatar">SA</div>
+            <div>
+              <strong>Sarah Ahmed</strong>
+              <span>Founder, CloudApp Studio</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card" data-aos>
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"We've hosted on 5 different providers. DSCVPS is the only one that's never let us down. Rock-solid uptime and DDoS protection saved us during a major attack."</p>
+          <div class="testimonial-author">
+            <div class="avatar">MK</div>
+            <div>
+              <strong>Marcus Kim</strong>
+              <span>DevOps Lead, ScaleNet</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Get In Touch</div>
+        <h2>Start Your <span class="gradient-text">Free Trial</span> Today</h2>
+        <p>No credit card required. Get your VPS running in 60 seconds.</p>
+      </div>
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <strong>Email Us</strong>
+              <span>support@nexusvps.com</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-comments"></i>
+            <div>
+              <strong>Live Chat</strong>
+              <span>Available 24/7 instantly</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <strong>Phone</strong>
+              <span>+1 (800) 123-4567</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <strong>HQ</strong>
+              <span>San Francisco, CA, USA</span>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" placeholder="John Doe" required />
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" placeholder="john@example.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Plan Interest</label>
+            <select>
+              <option value="">Select a plan...</option>
+              <option>Starter - $5/mo</option>
+              <option>Pro - $20/mo</option>
+              <option>Business - $60/mo</option>
+              <option>Enterprise - Custom</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea rows="4" placeholder="Tell us about your project..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg w-full">
+            <span id="btnText">Send Message <i class="fas fa-paper-plane"></i></span>
+            <span id="btnLoader" style="display:none"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
+          </button>
+          <div id="formSuccess" class="form-success" style="display:none">
+            <i class="fas fa-check-circle"></i> Message sent! We'll reply within 24 hours.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <i class="fas fa-server"></i>
+            <span>DSC<b>VPS</b></span>
+          </div>
+          <p>High-performance VPS hosting for developers, startups, and enterprises worldwide.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a href="#">VPS Hosting</a></li>
+            <li><a href="#">Dedicated Servers</a></li>
+            <li><a href="#">Cloud Storage</a></li>
+            <li><a href="#">CDN</a></li>
+            <li><a href="#">Load Balancers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Partners</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">API Reference</a></li>
+            <li><a href="#">Status Page</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 DSCVPS. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

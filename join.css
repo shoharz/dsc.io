@@ -1,0 +1,174 @@
+/* ===== JOIN PAGE EXTRAS ===== */
+.join-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(99,102,241,0.12);
+  border: 1px solid rgba(99,102,241,0.3);
+  color: var(--primary-light);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.join-stats {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 28px;
+  padding: 20px 0;
+  border-top: 1px solid var(--border2);
+  border-bottom: 1px solid var(--border2);
+}
+
+.join-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.join-stat-num {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+.join-stat span:last-child {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+/* ===== FORM ROW 2-COL ===== */
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ===== SELECT WRAP ===== */
+.select-wrap select {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--text);
+  padding: 12px 16px 12px 44px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.select-wrap select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+}
+.select-wrap select option { background: var(--bg3); }
+
+/* ===== PASSWORD STRENGTH ===== */
+.pw-strength {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+.pw-bars {
+  display: flex;
+  gap: 4px;
+}
+.pw-bar {
+  display: block;
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border2);
+  transition: background 0.3s;
+}
+.pw-bar.weak   { background: var(--red); }
+.pw-bar.fair   { background: var(--orange); }
+.pw-bar.good   { background: #eab308; }
+.pw-bar.strong { background: var(--green); }
+
+.pw-label {
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+/* ===== INLINE LINK ===== */
+.inline-link {
+  color: var(--primary-light);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.inline-link:hover { color: #fff; }
+
+/* ===== OPTIONAL LABEL ===== */
+.optional {
+  color: var(--text-dim);
+  font-weight: 400;
+  font-size: 0.78rem;
+}
+
+/* ===== SUCCESS STATE ===== */
+.join-success {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 16px;
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.25);
+  border-radius: 10px;
+  color: var(--green);
+  animation: fadeIn 0.4s ease;
+}
+.join-success i { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.join-success strong { display: block; font-size: 0.9rem; margin-bottom: 2px; color: #fff; }
+.join-success p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== JOIN RIGHT wider card ===== */
+.join-right .auth-card { max-width: 500px; width: 100%; }
+.join-right { width: 560px; }
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  color: var(--text);
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: all 0.35s ease;
+  z-index: 9999;
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+}
+.toast i { color: var(--primary-light); }
+.toast.toast-show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .join-right { width: 480px; }
+}
+@media (max-width: 768px) {
+  .form-row-2 { grid-template-columns: 1fr; }
+  .join-right { width: 100%; }
+}

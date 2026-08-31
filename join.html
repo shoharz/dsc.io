@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join Us — NexusVPS</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="join.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="auth-body">
+
+  <div class="auth-bg">
+    <div class="grid-overlay"></div>
+    <div class="particles" id="particles"></div>
+    <div class="glow-orb orb1"></div>
+    <div class="glow-orb orb2"></div>
+  </div>
+
+  <div class="auth-wrapper">
+
+    <!-- LEFT PANEL -->
+    <div class="auth-left">
+      <a href="index.html" class="auth-logo">
+        <i class="fas fa-server"></i>
+        <span>Nexus<b>VPS</b></span>
+      </a>
+      <div class="auth-left-content">
+        <div class="join-badge"><i class="fas fa-bolt"></i> Free 7-day trial — no credit card</div>
+        <h2>Launch your first server in under 60 seconds</h2>
+        <p>Join over 50,000 developers and businesses who trust NexusVPS to power their infrastructure.</p>
+        <div class="join-stats">
+          <div class="join-stat">
+            <span class="join-stat-num">50K+</span>
+            <span>Servers Running</span>
+          </div>
+          <div class="join-stat">
+            <span class="join-stat-num">99.9%</span>
+            <span>Uptime SLA</span>
+          </div>
+          <div class="join-stat">
+            <span class="join-stat-num">15+</span>
+            <span>Global Locations</span>
+          </div>
+        </div>
+        <ul class="auth-perks">
+          <li><i class="fas fa-check-circle"></i> Deploy in under 60 seconds</li>
+          <li><i class="fas fa-check-circle"></i> NVMe SSD on all plans</li>
+          <li><i class="fas fa-check-circle"></i> Free DDoS protection included</li>
+          <li><i class="fas fa-check-circle"></i> Cancel anytime, no lock-in</li>
+          <li><i class="fas fa-check-circle"></i> 24/7 expert human support</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="auth-right join-right">
+      <div class="auth-card">
+        <div class="auth-card-header">
+          <h1>Create your account</h1>
+          <p>Already have an account? <a href="login.html">Sign in</a></p>
+        </div>
+
+        <div class="social-auth">
+          <button class="social-btn" id="googleBtn">
+            <svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z"/><path fill="#FBBC05" d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z"/></svg>
+            Sign up with Google
+          </button>
+          <button class="social-btn" id="githubBtn">
+            <i class="fab fa-github"></i>
+            Sign up with GitHub
+          </button>
+        </div>
+
+        <div class="divider"><span>or sign up with email</span></div>
+
+        <form id="joinForm" novalidate>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>First Name</label>
+              <div class="input-wrap">
+                <i class="fas fa-user"></i>
+                <input type="text" id="firstName" placeholder="John" required />
+              </div>
+              <span class="field-error" id="firstNameError"></span>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <div class="input-wrap">
+                <i class="fas fa-user"></i>
+                <input type="text" id="lastName" placeholder="Doe" required />
+              </div>
+              <span class="field-error" id="lastNameError"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <div class="input-wrap">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="email" placeholder="you@example.com" required />
+            </div>
+            <span class="field-error" id="emailError"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <div class="input-wrap">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="password" placeholder="Min. 8 characters" required />
+              <button type="button" class="toggle-pw" id="togglePw" aria-label="Show password">
+                <i class="fas fa-eye" id="eyeIcon"></i>
+              </button>
+            </div>
+            <div class="pw-strength" id="pwStrength">
+              <div class="pw-bars">
+                <span class="pw-bar" id="bar1"></span>
+                <span class="pw-bar" id="bar2"></span>
+                <span class="pw-bar" id="bar3"></span>
+                <span class="pw-bar" id="bar4"></span>
+              </div>
+              <span class="pw-label" id="pwLabel">Enter a password</span>
+            </div>
+            <span class="field-error" id="passwordError"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <div class="input-wrap">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="confirmPassword" placeholder="Repeat your password" required />
+            </div>
+            <span class="field-error" id="confirmPasswordError"></span>
+          </div>
+
+          <div class="form-group">
+            <label>Plan <span class="optional">(optional)</span></label>
+            <div class="input-wrap select-wrap">
+              <i class="fas fa-server"></i>
+              <select id="plan">
+                <option value="">Choose a plan to start with...</option>
+                <option value="starter">Starter — $5/mo (1 vCPU, 1GB RAM)</option>
+                <option value="pro">Pro — $20/mo (4 vCPU, 8GB RAM)</option>
+                <option value="business">Business — $60/mo (8 vCPU, 32GB RAM)</option>
+                <option value="enterprise">Enterprise — Custom</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-options">
+            <label class="checkbox-label">
+              <input type="checkbox" id="agreeTerms" required />
+              <span class="checkmark"></span>
+              I agree to the <a href="#" class="inline-link">Terms of Service</a> and <a href="#" class="inline-link">Privacy Policy</a>
+            </label>
+            <span class="field-error" id="termsError"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg w-full" id="joinBtn">
+            <span id="joinBtnText">Create Account <i class="fas fa-arrow-right"></i></span>
+            <span id="joinBtnLoader" style="display:none"><i class="fas fa-spinner fa-spin"></i> Creating account...</span>
+          </button>
+
+          <div id="joinError" class="login-error" style="display:none">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="joinErrorMsg">Something went wrong. Please try again.</span>
+          </div>
+
+          <div id="joinSuccess" class="join-success" style="display:none">
+            <i class="fas fa-check-circle"></i>
+            <div>
+              <strong>Account created!</strong>
+              <p>Welcome to NexusVPS. Redirecting to your dashboard...</p>
+            </div>
+          </div>
+        </form>
+
+        <div class="auth-footer-note">
+          By creating an account, you agree to our
+          <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+        </div>
+      </div>
+
+      <a href="index.html" class="back-home">
+        <i class="fas fa-arrow-left"></i> Back to homepage
+      </a>
+    </div>
+
+  </div>
+
+  <script src="join.js"></script>
+</body>
+</html>
