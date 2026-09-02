@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — DSCVPS</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="admin.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="admin-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <i class="fas fa-server"></i>
+      <span>DSC<b>VPS</b></span>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="sidebar-section-label">Main</div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-section="overview">
+        <i class="fas fa-chart-line"></i><span>Overview</span>
+      </a>
+      <a href="#" class="nav-item" data-section="users">
+        <i class="fas fa-users"></i><span>Users</span>
+        <span class="nav-badge">1,284</span>
+      </a>
+      <a href="#" class="nav-item" data-section="servers">
+        <i class="fas fa-server"></i><span>Servers</span>
+        <span class="nav-badge green">48</span>
+      </a>
+      <a href="#" class="nav-item" data-section="billing">
+        <i class="fas fa-credit-card"></i><span>Billing</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-section-label">Support</div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item" data-section="tickets">
+        <i class="fas fa-headset"></i><span>Tickets</span>
+        <span class="nav-badge red">7</span>
+      </a>
+      <a href="#" class="nav-item" data-section="announcements">
+        <i class="fas fa-bullhorn"></i><span>Announcements</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-section-label">System</div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item" data-section="settings">
+        <i class="fas fa-cog"></i><span>Settings</span>
+      </a>
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-globe"></i><span>View Site</span>
+      </a>
+      <a href="login.html" class="nav-item logout">
+        <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="admin-profile">
+        <div class="avatar sm">AD</div>
+        <div>
+          <strong>Admin</strong>
+          <span>Super Admin</span>
+        </div>
+        <i class="fas fa-circle online-dot"></i>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="admin-main" id="adminMain">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+        <div class="breadcrumb">
+          <span>Admin</span>
+          <i class="fas fa-chevron-right"></i>
+          <span id="breadcrumbCurrent">Overview</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search users, servers..." id="globalSearch" />
+        </div>
+        <button class="topbar-btn" title="Notifications" id="notifBtn">
+          <i class="fas fa-bell"></i>
+          <span class="notif-dot"></span>
+        </button>
+        <button class="topbar-btn" title="Refresh" id="refreshBtn">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+        <div class="topbar-avatar">
+          <div class="avatar sm">AD</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTIONS -->
+    <div class="admin-content">
+
+      <!-- ===== OVERVIEW ===== -->
+      <section class="section active" id="section-overview">
+        <div class="section-title">
+          <h2>Overview</h2>
+          <span class="last-updated" id="lastUpdated"></span>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-card-icon blue"><i class="fas fa-users"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" data-target="1284">0</span>
+              <span class="stat-card-label">Total Users</span>
+            </div>
+            <div class="stat-card-trend up"><i class="fas fa-arrow-up"></i> 12%</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon green"><i class="fas fa-server"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" data-target="3847">0</span>
+              <span class="stat-card-label">Active Servers</span>
+            </div>
+            <div class="stat-card-trend up"><i class="fas fa-arrow-up"></i> 8%</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon purple"><i class="fas fa-dollar-sign"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num currency-num" data-target="94820">0</span>
+              <span class="stat-card-label">Monthly Revenue</span>
+            </div>
+            <div class="stat-card-trend up"><i class="fas fa-arrow-up"></i> 23%</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon red"><i class="fas fa-headset"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" data-target="7">0</span>
+              <span class="stat-card-label">Open Tickets</span>
+            </div>
+            <div class="stat-card-trend down"><i class="fas fa-arrow-down"></i> 3%</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon orange"><i class="fas fa-network-wired"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" data-target="99">0</span><span class="stat-suffix">.9%</span>
+              <span class="stat-card-label">Network Uptime</span>
+            </div>
+            <div class="stat-card-trend up"><i class="fas fa-arrow-up"></i> Stable</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon cyan"><i class="fas fa-hdd"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num" data-target="78">0</span><span class="stat-suffix">%</span>
+              <span class="stat-card-label">Storage Used</span>
+            </div>
+            <div class="stat-card-trend down"><i class="fas fa-arrow-up"></i> +2%</div>
+          </div>
+        </div>
+
+        <div class="overview-grid">
+          <div class="card">
+            <div class="card-header">
+              <h3>Revenue (Last 7 Days)</h3>
+              <div class="card-actions">
+                <select class="mini-select" id="revenueRange">
+                  <option>7 days</option>
+                  <option>30 days</option>
+                  <option>90 days</option>
+                </select>
+              </div>
+            </div>
+            <div class="chart-wrap">
+              <canvas id="revenueChart"></canvas>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3>Server Status</h3></div>
+            <div class="donut-wrap">
+              <canvas id="serverChart"></canvas>
+              <div class="donut-legend">
+                <div class="legend-item"><span class="dot green"></span> Running <b>3,847</b></div>
+                <div class="legend-item"><span class="dot orange"></span> Suspended <b>124</b></div>
+                <div class="legend-item"><span class="dot red"></span> Offline <b>31</b></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h3>Recent Activity</h3>
+              <a href="#" class="card-link">View all</a>
+            </div>
+            <ul class="activity-list">
+              <li><span class="act-icon green"><i class="fas fa-plus"></i></span><div><strong>New server deployed</strong><span>user: john@doe.com · VPS-PRO-2341</span></div><time>2m ago</time></li>
+              <li><span class="act-icon blue"><i class="fas fa-user-plus"></i></span><div><strong>New user registered</strong><span>sarah@cloudapp.io</span></div><time>14m ago</time></li>
+              <li><span class="act-icon red"><i class="fas fa-exclamation-triangle"></i></span><div><strong>Ticket opened</strong><span>Ticket #1047 — Connection issue</span></div><time>31m ago</time></li>
+              <li><span class="act-icon purple"><i class="fas fa-credit-card"></i></span><div><strong>Payment received</strong><span>$35.00 — Pro Plan · marcus@scale.net</span></div><time>1h ago</time></li>
+              <li><span class="act-icon orange"><i class="fas fa-power-off"></i></span><div><strong>Server stopped</strong><span>VPS-STR-0892 · admin action</span></div><time>2h ago</time></li>
+              <li><span class="act-icon cyan"><i class="fas fa-shield-alt"></i></span><div><strong>DDoS mitigated</strong><span>Node: FRA-01 · 4.2 Gbps blocked</span></div><time>3h ago</time></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3>Top Plans</h3></div>
+            <ul class="top-plans-list">
+              <li>
+                <span class="plan-name"><i class="fas fa-rocket"></i> Pro</span>
+                <div class="plan-bar-wrap"><div class="plan-bar" style="--w:68%"></div></div>
+                <span class="plan-pct">68%</span>
+              </li>
+              <li>
+                <span class="plan-name"><i class="fas fa-crown"></i> Business</span>
+                <div class="plan-bar-wrap"><div class="plan-bar orange" style="--w:19%"></div></div>
+                <span class="plan-pct">19%</span>
+              </li>
+              <li>
+                <span class="plan-name"><i class="fas fa-seedling"></i> Starter</span>
+                <div class="plan-bar-wrap"><div class="plan-bar purple" style="--w:9%"></div></div>
+                <span class="plan-pct">9%</span>
+              </li>
+              <li>
+                <span class="plan-name"><i class="fas fa-building"></i> Enterprise</span>
+                <div class="plan-bar-wrap"><div class="plan-bar cyan" style="--w:4%"></div></div>
+                <span class="plan-pct">4%</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== USERS ===== -->
+      <section class="section" id="section-users">
+        <div class="section-title">
+          <h2>User Management</h2>
+          <button class="btn btn-primary btn-sm" id="addUserBtn"><i class="fas fa-plus"></i> Add User</button>
+        </div>
+        <div class="card">
+          <div class="table-toolbar">
+            <div class="search-box sm">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Search users..." id="userSearch" />
+            </div>
+            <div class="toolbar-filters">
+              <select class="mini-select" id="userStatusFilter">
+                <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="suspended">Suspended</option>
+                <option value="banned">Banned</option>
+              </select>
+              <select class="mini-select" id="userPlanFilter">
+                <option value="">All Plans</option>
+                <option value="starter">Starter</option>
+                <option value="pro">Pro</option>
+                <option value="business">Business</option>
+                <option value="enterprise">Enterprise</option>
+              </select>
+              <button class="btn btn-outline btn-sm" id="exportUsersBtn"><i class="fas fa-download"></i> Export</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="usersTable">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="selectAllUsers" /></th>
+                  <th>User</th>
+                  <th>Plan</th>
+                  <th>Servers</th>
+                  <th>Joined</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody"></tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span id="userCount">Showing 0 users</span>
+            <div class="pagination" id="userPagination"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SERVERS ===== -->
+      <section class="section" id="section-servers">
+        <div class="section-title">
+          <h2>Server Management</h2>
+          <button class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> New Server</button>
+        </div>
+        <div class="server-stats-row">
+          <div class="mini-stat"><i class="fas fa-circle green"></i> Running <b id="srvRunning">0</b></div>
+          <div class="mini-stat"><i class="fas fa-circle orange"></i> Suspended <b id="srvSuspended">0</b></div>
+          <div class="mini-stat"><i class="fas fa-circle red"></i> Offline <b id="srvOffline">0</b></div>
+          <div class="mini-stat"><i class="fas fa-circle blue"></i> Total <b id="srvTotal">0</b></div>
+        </div>
+        <div class="card">
+          <div class="table-toolbar">
+            <div class="search-box sm">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Search servers..." id="serverSearch" />
+            </div>
+            <div class="toolbar-filters">
+              <select class="mini-select" id="serverStatusFilter">
+                <option value="">All Status</option>
+                <option value="running">Running</option>
+                <option value="suspended">Suspended</option>
+                <option value="offline">Offline</option>
+              </select>
+              <select class="mini-select" id="serverLocationFilter">
+                <option value="">All Locations</option>
+                <option value="Frankfurt">Frankfurt</option>
+                <option value="New York">New York</option>
+                <option value="Singapore">Singapore</option>
+                <option value="London">London</option>
+                <option value="Tokyo">Tokyo</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="serversTable">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" /></th>
+                  <th>Server ID</th>
+                  <th>Owner</th>
+                  <th>Plan</th>
+                  <th>Location</th>
+                  <th>IP Address</th>
+                  <th>CPU</th>
+                  <th>RAM</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="serversTableBody"></tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span id="serverCount">Showing 0 servers</span>
+            <div class="pagination" id="serverPagination"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== BILLING ===== -->
+      <section class="section" id="section-billing">
+        <div class="section-title">
+          <h2>Billing & Invoices</h2>
+          <button class="btn btn-primary btn-sm"><i class="fas fa-file-invoice"></i> New Invoice</button>
+        </div>
+        <div class="billing-stats">
+          <div class="stat-card">
+            <div class="stat-card-icon green"><i class="fas fa-dollar-sign"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num">$94,820</span>
+              <span class="stat-card-label">This Month</span>
+            </div>
+            <div class="stat-card-trend up"><i class="fas fa-arrow-up"></i> 23%</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon blue"><i class="fas fa-file-invoice-dollar"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num">2,341</span>
+              <span class="stat-card-label">Total Invoices</span>
+            </div>
+            <div class="stat-card-trend up"><i class="fas fa-arrow-up"></i> 5%</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon orange"><i class="fas fa-clock"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num">$3,240</span>
+              <span class="stat-card-label">Pending</span>
+            </div>
+            <div class="stat-card-trend down"><i class="fas fa-arrow-down"></i> 8%</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon red"><i class="fas fa-times-circle"></i></div>
+            <div class="stat-card-info">
+              <span class="stat-card-num">$820</span>
+              <span class="stat-card-label">Overdue</span>
+            </div>
+            <div class="stat-card-trend down"><i class="fas fa-arrow-down"></i> 12%</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>Recent Invoices</h3>
+            <div class="card-actions">
+              <select class="mini-select">
+                <option>This Month</option>
+                <option>Last Month</option>
+                <option>Last 3 Months</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Invoice #</th>
+                  <th>User</th>
+                  <th>Plan</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="invoicesTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TICKETS ===== -->
+      <section class="section" id="section-tickets">
+        <div class="section-title">
+          <h2>Support Tickets</h2>
+          <div class="title-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="open">Open</button>
+            <button class="filter-btn" data-filter="pending">Pending</button>
+            <button class="filter-btn" data-filter="closed">Closed</button>
+          </div>
+        </div>
+        <div class="tickets-grid" id="ticketsGrid"></div>
+      </section>
+
+      <!-- ===== ANNOUNCEMENTS ===== -->
+      <section class="section" id="section-announcements">
+        <div class="section-title">
+          <h2>Announcements</h2>
+          <button class="btn btn-primary btn-sm" id="newAnnouncementBtn"><i class="fas fa-plus"></i> New Announcement</button>
+        </div>
+        <div class="card" id="announcementForm" style="display:none; margin-bottom:24px;">
+          <div class="card-header"><h3 id="announcementFormTitle">New Announcement</h3></div>
+          <div class="form-group">
+            <label>Title</label>
+            <div class="input-wrap"><i class="fas fa-heading"></i><input type="text" id="annTitle" placeholder="Announcement title..." /></div>
+          </div>
+          <div class="form-group">
+            <label>Type</label>
+            <select id="annType" class="admin-select">
+              <option value="info">Info</option>
+              <option value="warning">Warning</option>
+              <option value="success">Success</option>
+              <option value="danger">Critical</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea id="annMessage" rows="4" placeholder="Write your announcement..." class="admin-textarea"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary btn-sm" id="publishAnnBtn"><i class="fas fa-paper-plane"></i> Publish</button>
+            <button class="btn btn-outline btn-sm" id="cancelAnnBtn">Cancel</button>
+          </div>
+        </div>
+        <div class="announcements-list" id="announcementsList"></div>
+      </section>
+
+      <!-- ===== SETTINGS ===== -->
+      <section class="section" id="section-settings">
+        <div class="section-title"><h2>Settings</h2></div>
+        <div class="settings-grid">
+
+          <div class="card settings-card">
+            <div class="card-header"><h3><i class="fas fa-globe"></i> Site Configuration</h3></div>
+            <div class="form-group"><label>Site Name</label><input type="text" class="admin-input" value="DSCVPS" /></div>
+            <div class="form-group"><label>Tagline</label><input type="text" class="admin-input" value="High Performance VPS Hosting" /></div>
+            <div class="form-group"><label>Support Email</label><input type="email" class="admin-input" value="support@dscvps.com" /></div>
+            <div class="form-group"><label>Maintenance Mode</label>
+              <label class="toggle-sm"><input type="checkbox" /><span class="slider-sm"></span></label>
+            </div>
+            <button class="btn btn-primary btn-sm">Save Changes</button>
+          </div>
+
+          <div class="card settings-card">
+            <div class="card-header"><h3><i class="fas fa-envelope"></i> SMTP / Email</h3></div>
+            <div class="form-group"><label>SMTP Host</label><input type="text" class="admin-input" placeholder="smtp.example.com" /></div>
+            <div class="form-group"><label>SMTP Port</label><input type="number" class="admin-input" value="587" /></div>
+            <div class="form-group"><label>Username</label><input type="text" class="admin-input" placeholder="no-reply@dscvps.com" /></div>
+            <div class="form-group"><label>Password</label><input type="password" class="admin-input" placeholder="••••••••" /></div>
+            <button class="btn btn-primary btn-sm">Save & Test</button>
+          </div>
+
+          <div class="card settings-card">
+            <div class="card-header"><h3><i class="fas fa-key"></i> API Keys</h3></div>
+            <div class="form-group"><label>Public API Key</label>
+              <div class="api-key-wrap">
+                <input type="text" class="admin-input" value="pk_live_dscvps_a1b2c3d4e5f6" readonly id="pubKey" />
+                <button class="copy-btn" onclick="copyKey('pubKey')"><i class="fas fa-copy"></i></button>
+              </div>
+            </div>
+            <div class="form-group"><label>Secret API Key</label>
+              <div class="api-key-wrap">
+                <input type="password" class="admin-input" value="sk_live_dscvps_x9y8z7w6v5u4" readonly id="secKey" />
+                <button class="copy-btn" onclick="copyKey('secKey')"><i class="fas fa-copy"></i></button>
+              </div>
+            </div>
+            <button class="btn btn-outline btn-sm"><i class="fas fa-sync-alt"></i> Regenerate Keys</button>
+          </div>
+
+          <div class="card settings-card">
+            <div class="card-header"><h3><i class="fas fa-shield-alt"></i> Security</h3></div>
+            <div class="form-group setting-row"><span>Two-Factor Auth (Admin)</span><label class="toggle-sm"><input type="checkbox" checked /><span class="slider-sm"></span></label></div>
+            <div class="form-group setting-row"><span>Force HTTPS</span><label class="toggle-sm"><input type="checkbox" checked /><span class="slider-sm"></span></label></div>
+            <div class="form-group setting-row"><span>IP Whitelist</span><label class="toggle-sm"><input type="checkbox" /><span class="slider-sm"></span></label></div>
+            <div class="form-group setting-row"><span>Login Alerts</span><label class="toggle-sm"><input type="checkbox" checked /><span class="slider-sm"></span></label></div>
+            <div class="form-group setting-row"><span>DDoS Auto-Mitigation</span><label class="toggle-sm"><input type="checkbox" checked /><span class="slider-sm"></span></label></div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- USER MODAL -->
+  <div class="modal-overlay" id="userModal" style="display:none">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="userModalTitle">User Details</h3>
+        <button class="modal-close" id="userModalClose"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body" id="userModalBody"></div>
+    </div>
+  </div>
+
+  <!-- TICKET MODAL -->
+  <div class="modal-overlay" id="ticketModal" style="display:none">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="ticketModalTitle">Ticket Details</h3>
+        <button class="modal-close" id="ticketModalClose"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body" id="ticketModalBody"></div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
