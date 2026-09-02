@@ -48,6 +48,17 @@
       </a>
     </nav>
 
+    <div class="sidebar-section-label">Store</div>
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item" data-section="offers">
+        <i class="fas fa-tags"></i><span>VPS Offers</span>
+      </a>
+      <a href="#" class="nav-item" data-section="orders">
+        <i class="fas fa-shopping-cart"></i><span>Orders</span>
+        <span class="nav-badge orange" id="pendingOrdersBadge">0</span>
+      </a>
+    </nav>
+
     <div class="sidebar-section-label">System</div>
     <nav class="sidebar-nav">
       <a href="#" class="nav-item" data-section="settings">
@@ -467,58 +478,344 @@
         <div class="announcements-list" id="announcementsList"></div>
       </section>
 
-      <!-- ===== SETTINGS ===== -->
+      <!-- ===== VPS OFFERS ===== -->
+      <section class="section" id="section-offers">
+        <div class="section-title">
+          <h2>VPS Offers & Pricing</h2>
+          <button class="btn btn-primary btn-sm" id="addPlanBtn"><i class="fas fa-plus"></i> Add Plan</button>
+        </div>
+        <div class="offers-notice">
+          <i class="fas fa-info-circle"></i>
+          Changes saved here update the pricing displayed on the public website instantly.
+        </div>
+
+        <!-- PLAN EDITOR FORM -->
+        <div class="card" id="planEditorForm" style="display:none; margin-bottom:24px;">
+          <div class="card-header">
+            <h3 id="planEditorTitle">New Plan</h3>
+            <button class="modal-close" id="closePlanEditor"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="plan-editor-body">
+            <input type="hidden" id="editPlanId" />
+            <div class="plan-editor-grid">
+              <div class="form-group">
+                <label>Plan Name</label>
+                <input type="text" class="admin-input" id="editPlanName" placeholder="e.g. Pro" />
+              </div>
+              <div class="form-group">
+                <label>Icon (FA class)</label>
+                <input type="text" class="admin-input" id="editPlanIcon" placeholder="e.g. fa-rocket" />
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <input type="text" class="admin-input" id="editPlanDesc" placeholder="Short description" />
+              </div>
+              <div class="form-group">
+                <label>Monthly Price ($)</label>
+                <input type="number" class="admin-input" id="editPlanMonthly" placeholder="0" min="0" />
+              </div>
+              <div class="form-group">
+                <label>Annual Price ($)</label>
+                <input type="number" class="admin-input" id="editPlanAnnual" placeholder="0" min="0" />
+              </div>
+              <div class="form-group">
+                <label>Badge</label>
+                <select class="admin-select" id="editPlanBadge">
+                  <option value="">None</option>
+                  <option value="popular">Most Popular</option>
+                  <option value="enterprise">Enterprise</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>vCPU Cores</label>
+                <input type="text" class="admin-input" id="editPlanCpu" placeholder="e.g. 4" />
+              </div>
+              <div class="form-group">
+                <label>RAM</label>
+                <input type="text" class="admin-input" id="editPlanRam" placeholder="e.g. 8 GB" />
+              </div>
+              <div class="form-group">
+                <label>Storage</label>
+                <input type="text" class="admin-input" id="editPlanStorage" placeholder="e.g. 160 GB NVMe SSD" />
+              </div>
+              <div class="form-group">
+                <label>Bandwidth</label>
+                <input type="text" class="admin-input" id="editPlanBandwidth" placeholder="e.g. 4 TB" />
+              </div>
+              <div class="form-group">
+                <label>IPv4 Addresses</label>
+                <input type="text" class="admin-input" id="editPlanIpv4" placeholder="e.g. 2" />
+              </div>
+              <div class="form-group">
+                <label>Status</label>
+                <select class="admin-select" id="editPlanStatus">
+                  <option value="active">Active</option>
+                  <option value="hidden">Hidden</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group" style="padding:0 22px;">
+              <label>Features (one per line — prefix with + for included, - for excluded)</label>
+              <textarea class="admin-textarea" id="editPlanFeatures" rows="6" placeholder="+ DDoS Protection&#10;+ Daily Backups&#10;- Priority Support"></textarea>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary btn-sm" id="savePlanBtn"><i class="fas fa-save"></i> Save & Publish</button>
+              <button class="btn btn-outline btn-sm" id="cancelPlanBtn">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PLANS LIST -->
+        <div class="plans-admin-grid" id="plansAdminGrid"></div>
+      </section>
+
+      <!-- ===== ORDERS ===== -->
+      <section class="section" id="section-orders">
+        <div class="section-title">
+          <h2>Orders</h2>
+          <div class="title-filters">
+            <button class="filter-btn active" data-ofilter="all">All</button>
+            <button class="filter-btn" data-ofilter="pending">Pending</button>
+            <button class="filter-btn" data-ofilter="active">Active</button>
+            <button class="filter-btn" data-ofilter="cancelled">Cancelled</button>
+          </div>
+        </div>
+        <div class="orders-stats">
+          <div class="mini-stat"><i class="fas fa-circle blue"></i> Total <b id="ordTotal">0</b></div>
+          <div class="mini-stat"><i class="fas fa-circle orange"></i> Pending <b id="ordPending">0</b></div>
+          <div class="mini-stat"><i class="fas fa-circle green"></i> Active <b id="ordActive">0</b></div>
+          <div class="mini-stat"><i class="fas fa-circle red"></i> Cancelled <b id="ordCancelled">0</b></div>
+        </div>
+        <div class="card">
+          <div class="table-toolbar">
+            <div class="search-box sm">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Search orders..." id="orderSearch" />
+            </div>
+            <div class="toolbar-filters">
+              <select class="mini-select" id="orderPlanFilter">
+                <option value="">All Plans</option>
+                <option value="Starter">Starter</option>
+                <option value="Pro">Pro</option>
+                <option value="Business">Business</option>
+                <option value="Enterprise">Enterprise</option>
+              </select>
+              <button class="btn btn-outline btn-sm" id="exportOrdersBtn"><i class="fas fa-download"></i> Export CSV</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Plan</th>
+                  <th>Amount</th>
+                  <th>Billing</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody"></tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span id="orderCount">Showing 0 orders</span>
+            <div class="pagination" id="orderPagination"></div>
+          </div>
+        </div>
+      </section>
+
+
       <section class="section" id="section-settings">
         <div class="section-title"><h2>Settings</h2></div>
-        <div class="settings-grid">
 
-          <div class="card settings-card">
-            <div class="card-header"><h3><i class="fas fa-globe"></i> Site Configuration</h3></div>
-            <div class="form-group"><label>Site Name</label><input type="text" class="admin-input" value="DSCVPS" /></div>
-            <div class="form-group"><label>Tagline</label><input type="text" class="admin-input" value="High Performance VPS Hosting" /></div>
-            <div class="form-group"><label>Support Email</label><input type="email" class="admin-input" value="support@dscvps.com" /></div>
-            <div class="form-group"><label>Maintenance Mode</label>
-              <label class="toggle-sm"><input type="checkbox" /><span class="slider-sm"></span></label>
-            </div>
-            <button class="btn btn-primary btn-sm">Save Changes</button>
-          </div>
-
-          <div class="card settings-card">
-            <div class="card-header"><h3><i class="fas fa-envelope"></i> SMTP / Email</h3></div>
-            <div class="form-group"><label>SMTP Host</label><input type="text" class="admin-input" placeholder="smtp.example.com" /></div>
-            <div class="form-group"><label>SMTP Port</label><input type="number" class="admin-input" value="587" /></div>
-            <div class="form-group"><label>Username</label><input type="text" class="admin-input" placeholder="no-reply@dscvps.com" /></div>
-            <div class="form-group"><label>Password</label><input type="password" class="admin-input" placeholder="••••••••" /></div>
-            <button class="btn btn-primary btn-sm">Save & Test</button>
-          </div>
-
-          <div class="card settings-card">
-            <div class="card-header"><h3><i class="fas fa-key"></i> API Keys</h3></div>
-            <div class="form-group"><label>Public API Key</label>
-              <div class="api-key-wrap">
-                <input type="text" class="admin-input" value="pk_live_dscvps_a1b2c3d4e5f6" readonly id="pubKey" />
-                <button class="copy-btn" onclick="copyKey('pubKey')"><i class="fas fa-copy"></i></button>
-              </div>
-            </div>
-            <div class="form-group"><label>Secret API Key</label>
-              <div class="api-key-wrap">
-                <input type="password" class="admin-input" value="sk_live_dscvps_x9y8z7w6v5u4" readonly id="secKey" />
-                <button class="copy-btn" onclick="copyKey('secKey')"><i class="fas fa-copy"></i></button>
-              </div>
-            </div>
-            <button class="btn btn-outline btn-sm"><i class="fas fa-sync-alt"></i> Regenerate Keys</button>
-          </div>
-
-          <div class="card settings-card">
-            <div class="card-header"><h3><i class="fas fa-shield-alt"></i> Security</h3></div>
-            <div class="form-group setting-row"><span>Two-Factor Auth (Admin)</span><label class="toggle-sm"><input type="checkbox" checked /><span class="slider-sm"></span></label></div>
-            <div class="form-group setting-row"><span>Force HTTPS</span><label class="toggle-sm"><input type="checkbox" checked /><span class="slider-sm"></span></label></div>
-            <div class="form-group setting-row"><span>IP Whitelist</span><label class="toggle-sm"><input type="checkbox" /><span class="slider-sm"></span></label></div>
-            <div class="form-group setting-row"><span>Login Alerts</span><label class="toggle-sm"><input type="checkbox" checked /><span class="slider-sm"></span></label></div>
-            <div class="form-group setting-row"><span>DDoS Auto-Mitigation</span><label class="toggle-sm"><input type="checkbox" checked /><span class="slider-sm"></span></label></div>
-          </div>
-
+        <!-- SETTINGS TABS -->
+        <div class="settings-tabs">
+          <button class="stab active" data-stab="general"><i class="fas fa-globe"></i> General</button>
+          <button class="stab" data-stab="plans"><i class="fas fa-tags"></i> VPS Plans & Pricing</button>
+          <button class="stab" data-stab="smtp"><i class="fas fa-envelope"></i> SMTP</button>
+          <button class="stab" data-stab="api"><i class="fas fa-key"></i> API Keys</button>
+          <button class="stab" data-stab="security"><i class="fas fa-shield-alt"></i> Security</button>
         </div>
+
+        <!-- GENERAL -->
+        <div class="stab-panel active" id="stab-general">
+          <div class="settings-grid">
+            <div class="card settings-card">
+              <div class="card-header"><h3><i class="fas fa-globe"></i> Site Configuration</h3></div>
+              <div class="form-group"><label>Site Name</label><input type="text" class="admin-input" id="cfg-sitename" value="DSCVPS" /></div>
+              <div class="form-group"><label>Tagline</label><input type="text" class="admin-input" id="cfg-tagline" value="High Performance VPS Hosting" /></div>
+              <div class="form-group"><label>Support Email</label><input type="email" class="admin-input" id="cfg-email" value="support@dscvps.com" /></div>
+              <div class="form-group"><label>Support Phone</label><input type="text" class="admin-input" id="cfg-phone" value="+1 (800) 123-4567" /></div>
+              <div class="form-group setting-row"><span>Maintenance Mode</span><label class="toggle-sm"><input type="checkbox" id="cfg-maintenance" /><span class="slider-sm"></span></label></div>
+              <div class="form-group setting-row"><span>User Registration</span><label class="toggle-sm"><input type="checkbox" checked id="cfg-registration" /><span class="slider-sm"></span></label></div>
+              <button class="btn btn-primary btn-sm" id="saveGeneralBtn"><i class="fas fa-save"></i> Save Changes</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- VPS PLANS & PRICING -->
+        <div class="stab-panel" id="stab-plans">
+          <div class="section-title" style="margin-bottom:16px">
+            <span style="color:var(--text-muted);font-size:0.875rem"><i class="fas fa-info-circle" style="color:var(--primary-light);margin-right:6px"></i>Changes here update the public pricing page instantly.</span>
+            <button class="btn btn-primary btn-sm" id="addPlanBtn"><i class="fas fa-plus"></i> Add New Plan</button>
+          </div>
+
+          <!-- PLAN EDITOR -->
+          <div class="card" id="planEditorForm" style="display:none;margin-bottom:24px;">
+            <div class="card-header">
+              <h3 id="planEditorTitle"><i class="fas fa-edit"></i> New Plan</h3>
+              <button class="modal-close" id="closePlanEditor"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="plan-editor-body">
+              <input type="hidden" id="editPlanId" />
+              <div class="plan-editor-grid">
+                <div class="form-group">
+                  <label>Plan Name <span style="color:var(--red)">*</span></label>
+                  <input type="text" class="admin-input" id="editPlanName" placeholder="e.g. Pro" />
+                </div>
+                <div class="form-group">
+                  <label>Icon <span style="color:var(--text-dim);font-weight:400;font-size:0.75rem">(Font Awesome)</span></label>
+                  <input type="text" class="admin-input" id="editPlanIcon" placeholder="fa-rocket" />
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <input type="text" class="admin-input" id="editPlanDesc" placeholder="Short description" />
+                </div>
+                <div class="form-group">
+                  <label>Monthly Price ($) <span style="color:var(--text-dim);font-weight:400;font-size:0.75rem">0 = Custom</span></label>
+                  <input type="number" class="admin-input" id="editPlanMonthly" placeholder="0" min="0" />
+                </div>
+                <div class="form-group">
+                  <label>Annual Price ($)</label>
+                  <input type="number" class="admin-input" id="editPlanAnnual" placeholder="0" min="0" />
+                </div>
+                <div class="form-group">
+                  <label>Badge</label>
+                  <select class="admin-select" id="editPlanBadge">
+                    <option value="">None</option>
+                    <option value="popular">Most Popular</option>
+                    <option value="enterprise">Enterprise</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>vCPU Cores</label>
+                  <input type="text" class="admin-input" id="editPlanCpu" placeholder="e.g. 4" />
+                </div>
+                <div class="form-group">
+                  <label>RAM</label>
+                  <input type="text" class="admin-input" id="editPlanRam" placeholder="e.g. 8 GB" />
+                </div>
+                <div class="form-group">
+                  <label>Storage</label>
+                  <input type="text" class="admin-input" id="editPlanStorage" placeholder="e.g. 160 GB NVMe SSD" />
+                </div>
+                <div class="form-group">
+                  <label>Bandwidth</label>
+                  <input type="text" class="admin-input" id="editPlanBandwidth" placeholder="e.g. 4 TB" />
+                </div>
+                <div class="form-group">
+                  <label>IPv4 Addresses</label>
+                  <input type="text" class="admin-input" id="editPlanIpv4" placeholder="e.g. 2" />
+                </div>
+                <div class="form-group">
+                  <label>Visibility</label>
+                  <select class="admin-select" id="editPlanStatus">
+                    <option value="active">Active (visible)</option>
+                    <option value="hidden">Hidden</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group" style="padding:0 22px 0;">
+                <label>Features <span style="color:var(--text-dim);font-weight:400;font-size:0.75rem">— one per line, prefix + included / - excluded</span></label>
+                <textarea class="admin-textarea" id="editPlanFeatures" rows="7" placeholder="+ DDoS Protection&#10;+ Daily Backups&#10;+ Priority Support&#10;- Dedicated IP"></textarea>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary btn-sm" id="savePlanBtn"><i class="fas fa-save"></i> Save & Publish to Site</button>
+                <button class="btn btn-outline btn-sm" id="cancelPlanBtn"><i class="fas fa-times"></i> Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PLANS TABLE -->
+          <div class="card">
+            <div class="card-header"><h3>Current Plans</h3><span style="font-size:0.8rem;color:var(--text-dim)" id="planCountLabel"></span></div>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Plan</th>
+                    <th>Monthly</th>
+                    <th>Annual</th>
+                    <th>CPU</th>
+                    <th>RAM</th>
+                    <th>Storage</th>
+                    <th>Bandwidth</th>
+                    <th>Badge</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="plansTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SMTP -->
+        <div class="stab-panel" id="stab-smtp">
+          <div class="settings-grid">
+            <div class="card settings-card">
+              <div class="card-header"><h3><i class="fas fa-envelope"></i> SMTP / Email</h3></div>
+              <div class="form-group"><label>SMTP Host</label><input type="text" class="admin-input" placeholder="smtp.example.com" /></div>
+              <div class="form-group"><label>SMTP Port</label><input type="number" class="admin-input" value="587" /></div>
+              <div class="form-group"><label>Username</label><input type="text" class="admin-input" placeholder="no-reply@dscvps.com" /></div>
+              <div class="form-group"><label>Password</label><input type="password" class="admin-input" placeholder="••••••••" /></div>
+              <div class="form-group setting-row"><span>Use TLS</span><label class="toggle-sm"><input type="checkbox" checked /><span class="slider-sm"></span></label></div>
+              <button class="btn btn-primary btn-sm" onclick="toast('SMTP settings saved','success')"><i class="fas fa-save"></i> Save & Test</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- API KEYS -->
+        <div class="stab-panel" id="stab-api">
+          <div class="settings-grid">
+            <div class="card settings-card">
+              <div class="card-header"><h3><i class="fas fa-key"></i> API Keys</h3></div>
+              <div class="form-group"><label>Public API Key</label>
+                <div class="api-key-wrap">
+                  <input type="text" class="admin-input" value="pk_live_dscvps_a1b2c3d4e5f6" readonly id="pubKey" />
+                  <button class="copy-btn" onclick="copyKey('pubKey')"><i class="fas fa-copy"></i></button>
+                </div>
+              </div>
+              <div class="form-group"><label>Secret API Key</label>
+                <div class="api-key-wrap">
+                  <input type="password" class="admin-input" value="sk_live_dscvps_x9y8z7w6v5u4" readonly id="secKey" />
+                  <button class="copy-btn" onclick="copyKey('secKey')"><i class="fas fa-copy"></i></button>
+                </div>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="toast('API keys regenerated','success')"><i class="fas fa-sync-alt"></i> Regenerate Keys</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECURITY -->
+        <div class="stab-panel" id="stab-security">
+          <div class="settings-grid">
+            <div class="card settings-card">
+              <div class="card-header"><h3><i class="fas fa-shield-alt"></i> Security</h3></div>
+              <div class="form-group setting-row"><span>Two-Factor Auth (Admin)</span><label class="toggle-sm"><input type="checkbox" checked /><span class="slider-sm"></span></label></div>
+              <div class="form-group setting-row"><span>Force HTTPS</span><label class="toggle-sm"><input type="checkbox" checked /><span class="slider-sm"></span></label></div>
+              <div class="form-group setting-row"><span>IP Whitelist</span><label class="toggle-sm"><input type="checkbox" /><span class="slider-sm"></span></label></div>
+              <div class="form-group setting-row"><span>Login Alerts</span><label class="toggle-sm"><input type="checkbox" checked /><span class="slider-sm"></span></label></div>
+              <div class="form-group setting-row"><span>DDoS Auto-Mitigation</span><label class="toggle-sm"><input type="checkbox" checked /><span class="slider-sm"></span></label></div>
+              <button class="btn btn-primary btn-sm" style="margin:16px 22px 22px" onclick="toast('Security settings saved','success')"><i class="fas fa-save"></i> Save</button>
+            </div>
+          </div>
+        </div>
+
       </section>
 
     </div>

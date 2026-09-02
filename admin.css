@@ -803,6 +803,125 @@
   to   { opacity: 1; transform: translateX(0); }
 }
 
+/* ===== SETTINGS TABS ===== */
+.settings-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border2);
+  padding-bottom: 0;
+}
+
+.stab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-dim);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: -1px;
+}
+.stab:hover { color: var(--text); }
+.stab.active {
+  color: var(--primary-light);
+  border-bottom-color: var(--primary);
+}
+.stab i { font-size: 0.85rem; }
+
+.stab-panel { display: none; }
+.stab-panel.active { display: block; animation: fadeIn 0.25s ease; }
+
+/* ===== PLANS TABLE IN SETTINGS ===== */
+#plansTableBody tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* ===== OFFERS / PRICING ===== */
+.offers-notice {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 0.85rem;
+  color: var(--primary-light);
+  margin-bottom: 20px;
+}
+.offers-notice i { flex-shrink: 0; }
+
+.plan-editor-body { padding: 20px 22px 0; }
+.plan-editor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.plans-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.plan-admin-card {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all 0.25s;
+}
+.plan-admin-card:hover { border-color: var(--border); transform: translateY(-3px); box-shadow: var(--shadow); }
+.plan-admin-card.popular { border-color: var(--primary); }
+.plan-admin-card.hidden-plan { opacity: 0.5; }
+
+.pac-header {
+  padding: 18px 18px 14px;
+  border-bottom: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.pac-header-left { display: flex; align-items: center; gap: 10px; }
+.pac-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: rgba(99,102,241,0.1); color: var(--primary-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+}
+.pac-header h4 { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 2px; }
+.pac-header p  { font-size: 0.75rem; color: var(--text-dim); }
+
+.pac-price {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border2);
+}
+.pac-price .amount { font-size: 1.8rem; font-weight: 800; color: #fff; }
+.pac-price .currency { font-size: 0.9rem; color: var(--text-muted); margin-right: 2px; }
+.pac-price .period  { font-size: 0.82rem; color: var(--text-dim); }
+.pac-price .annual-note { font-size: 0.75rem; color: var(--text-dim); margin-top: 2px; }
+
+.pac-features {
+  padding: 12px 18px;
+  display: flex; flex-direction: column; gap: 7px;
+  border-bottom: 1px solid var(--border2);
+}
+.pac-features li { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 7px; }
+.pac-features li i.fa-check { color: var(--green); font-size: 0.7rem; }
+.pac-features li i.fa-times  { color: var(--text-dim); font-size: 0.7rem; }
+.pac-features li.excl { color: var(--text-dim); }
+
+.pac-actions {
+  padding: 12px 18px;
+  display: flex; gap: 8px;
+}
+
+/* ===== ORDERS ===== */
+.orders-stats { display: flex; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1200px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
