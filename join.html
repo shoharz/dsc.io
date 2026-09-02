@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join Us — NexusVPS</title>
+  <title>Join Us — DSCVPS</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="login.css" />
   <link rel="stylesheet" href="join.css" />
@@ -25,12 +25,12 @@
     <div class="auth-left">
       <a href="index.html" class="auth-logo">
         <i class="fas fa-server"></i>
-        <span>Nexus<b>VPS</b></span>
+        <span>DSC<b>VPS</b></span>
       </a>
       <div class="auth-left-content">
         <div class="join-badge"><i class="fas fa-bolt"></i> Free 7-day trial — no credit card</div>
         <h2>Launch your first server in under 60 seconds</h2>
-        <p>Join over 50,000 developers and businesses who trust NexusVPS to power their infrastructure.</p>
+        <p>Join over 50,000 developers and businesses who trust DSCVPS to power their infrastructure.</p>
         <div class="join-stats">
           <div class="join-stat">
             <span class="join-stat-num">50K+</span>
@@ -172,7 +172,7 @@
             <i class="fas fa-check-circle"></i>
             <div>
               <strong>Account created!</strong>
-              <p>Welcome to NexusVPS. Redirecting to your dashboard...</p>
+              <p>Welcome to DSCVPS. Redirecting to your dashboard...</p>
             </div>
           </div>
         </form>
@@ -190,8 +190,19 @@
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>emailjs.init('c4O8C8MBJ_rzRlNfJ');</script>
+  <!-- 1. Load EmailJS SDK first -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- 2. Initialize with Public Key -->
+  <script type="text/javascript">
+    (function() {
+      emailjs.init({
+        publicKey: "c4O8C8MBJ_rzRlNfJ",
+      });
+    })();
+  </script>
+
+  <!-- 3. Load custom logic last -->
   <script src="join.js"></script>
 </body>
 </html>
