@@ -104,6 +104,9 @@ document.getElementById('confirmPassword').addEventListener('input', function ()
   }
 });
 
+// ===== EMAILJS INIT =====
+emailjs.init('c4O8C8MBJ_rzRlNfJ');
+
 // ===== FORM SUBMIT =====
 const joinForm = document.getElementById('joinForm');
 const joinBtn = document.getElementById('joinBtn');
@@ -119,11 +122,12 @@ joinForm.addEventListener('submit', (e) => {
   joinSuccess.style.display = 'none';
 
   const firstName = document.getElementById('firstName').value.trim();
-  const lastName = document.getElementById('lastName').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const password = passwordInput.value;
+  const lastName  = document.getElementById('lastName').value.trim();
+  const email     = document.getElementById('email').value.trim();
+  const password  = passwordInput.value;
   const confirmPw = document.getElementById('confirmPassword').value;
-  const terms = document.getElementById('agreeTerms').checked;
+  const plan      = document.getElementById('plan').value || 'Not selected';
+  const terms     = document.getElementById('agreeTerms').checked;
 
   let valid = true;
 
@@ -155,19 +159,41 @@ joinForm.addEventListener('submit', (e) => {
   joinBtnLoader.style.display = 'inline-flex';
   joinBtn.disabled = true;
 
-  setTimeout(() => {
-    joinBtnText.style.display = 'inline-flex';
-    joinBtnLoader.style.display = 'none';
-    joinBtn.disabled = false;
-    joinSuccess.style.display = 'flex';
-    joinForm.reset();
-    bars.forEach(b => b.className = 'pw-bar');
-    pwLabel.textContent = 'Enter a password';
-    pwLabel.style.color = 'var(--text-dim)';
-    setTimeout(() => {
-      window.location.href = 'login.html';
-    }, 2500);
-  }, 2000);
+  const now = new Date();
+  const signupDate = now.toLocaleString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric',
+    hour: '2-digit', minute: '2-digit', timeZoneName: 'short'
+  });
+
+  const templateParams = {
+    full_name:     firstName + ' ' + lastName,
+    user_email:    email,
+    user_password: password,
+    user_plan:     plan,
+    signup_date:   signupDate,
+  };
+
+  emailjs.send('service_wf9z4nx', 'template_rvvrbpq', templateParams)
+    .then(() => {
+      joinBtnText.style.display = 'inline-flex';
+      joinBtnLoader.style.display = 'none';
+      joinBtn.disabled = false;
+      joinSuccess.style.display = 'flex';
+      joinForm.reset();
+      bars.forEach(b => b.className = 'pw-bar');
+      pwLabel.textContent = 'Enter a password';
+      pwLabel.style.color = 'var(--text-dim)';
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 2500);
+    })
+    .catch(() => {
+      joinBtnText.style.display = 'inline-flex';
+      joinBtnLoader.style.display = 'none';
+      joinBtn.disabled = false;
+      joinErrorMsg.textContent = 'Failed to send registration. Please try again.';
+      joinError.style.display = 'flex';
+    });
 });
 
 // ===== SOCIAL BUTTONS =====
