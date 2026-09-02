@@ -3,7 +3,8 @@
   min-height: 100vh;
   display: flex;
   align-items: stretch;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: relative;
 }
 
