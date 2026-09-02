@@ -76,7 +76,7 @@ loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
   loginError.style.display = 'none';
 
-  const email = document.getElementById('email').value.trim();
+  const email    = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
   let valid = true;
 
@@ -90,6 +90,10 @@ loginForm.addEventListener('submit', (e) => {
   }
   if (!valid) return;
 
+  // Check stored user data
+  const storedUser = JSON.parse(localStorage.getItem('dscvps_user'));
+  const userExists = storedUser && storedUser.email === email && storedUser.password === password;
+
   loginBtnText.style.display = 'none';
   loginBtnLoader.style.display = 'inline-flex';
   loginBtn.disabled = true;
@@ -99,8 +103,15 @@ loginForm.addEventListener('submit', (e) => {
     loginBtnLoader.style.display = 'none';
     loginBtn.disabled = false;
 
-    loginErrorMsg.textContent = 'Invalid email or password. Please try again.';
-    loginError.style.display = 'flex';
+    if (userExists) {
+      // Save login state and redirect to dashboard
+      localStorage.setItem('dscvps_loggedIn', 'true');
+      localStorage.setItem('dscvps_user_email', email);
+      window.location.href = 'dashboard.html';
+    } else {
+      loginErrorMsg.textContent = 'Invalid email or password. Please try again.';
+      loginError.style.display = 'flex';
+    }
   }, 1800);
 });
 

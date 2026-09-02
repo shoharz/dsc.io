@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — DSCVPS</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="dash-body">
+
+  <!-- SIDEBAR -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar-logo">
+      <i class="fas fa-server"></i>
+      <span>DSC<b>VPS</b></span>
+      <button class="dash-sidebar-close" id="dashSidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="dash-sidebar-label">Menu</div>
+    <nav class="dash-nav">
+      <a href="#" class="dash-nav-item active" data-panel="overview">
+        <i class="fas fa-th-large"></i><span>Overview</span>
+      </a>
+      <a href="#" class="dash-nav-item" data-panel="servers">
+        <i class="fas fa-server"></i><span>My Servers</span>
+        <span class="dash-badge">2</span>
+      </a>
+      <a href="#" class="dash-nav-item" data-panel="billing">
+        <i class="fas fa-credit-card"></i><span>Billing</span>
+      </a>
+      <a href="#" class="dash-nav-item" data-panel="support">
+        <i class="fas fa-headset"></i><span>Support</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar-label">Account</div>
+    <nav class="dash-nav">
+      <a href="#" class="dash-nav-item" data-panel="profile">
+        <i class="fas fa-user-circle"></i><span>Profile</span>
+      </a>
+      <a href="index.html" class="dash-nav-item">
+        <i class="fas fa-globe"></i><span>View Site</span>
+      </a>
+      <a href="login.html" class="dash-nav-item dash-logout">
+        <i class="fas fa-sign-out-alt"></i><span>Logout</span>
+      </a>
+    </nav>
+
+    <div class="dash-sidebar-footer">
+      <div class="dash-user-profile">
+        <div class="dash-avatar" id="sidebarAvatar">JD</div>
+        <div class="dash-user-info">
+          <strong id="sidebarName">John Doe</strong>
+          <span id="sidebarPlan">Pro Plan</span>
+        </div>
+        <span class="dash-online-dot"></span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="dash-main" id="dashMain">
+
+    <!-- TOPBAR -->
+    <header class="dash-topbar">
+      <div class="dash-topbar-left">
+        <button class="dash-menu-toggle" id="dashMenuToggle"><i class="fas fa-bars"></i></button>
+        <div class="dash-breadcrumb">
+          <span>Dashboard</span>
+          <i class="fas fa-chevron-right"></i>
+          <span id="dashBreadcrumb">Overview</span>
+        </div>
+      </div>
+      <div class="dash-topbar-right">
+        <button class="dash-topbar-btn" id="dashNotifBtn" title="Notifications">
+          <i class="fas fa-bell"></i>
+          <span class="dash-notif-dot"></span>
+        </button>
+        <div class="dash-topbar-user">
+          <div class="dash-avatar sm" id="topbarAvatar">JD</div>
+          <span id="topbarName">John Doe</span>
+          <i class="fas fa-chevron-down" style="font-size:0.7rem;color:var(--text-dim)"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- PANELS -->
+    <div class="dash-content">
+
+      <!-- ===== OVERVIEW ===== -->
+      <section class="dash-panel active" id="panel-overview">
+        <div class="dash-welcome" id="dashWelcome">
+          <div>
+            <h2>Welcome back, <span id="welcomeName">John</span>! 👋</h2>
+            <p>Here's what's happening with your servers today.</p>
+          </div>
+          <a href="#" class="btn btn-primary btn-sm" onclick="switchPanel('servers')">
+            <i class="fas fa-plus"></i> Deploy New Server
+          </a>
+        </div>
+
+        <!-- STATS -->
+        <div class="dash-stats-grid">
+          <div class="dash-stat-card">
+            <div class="dash-stat-icon green"><i class="fas fa-server"></i></div>
+            <div>
+              <span class="dash-stat-num">2</span>
+              <span class="dash-stat-label">Active Servers</span>
+            </div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="dash-stat-icon blue"><i class="fas fa-dollar-sign"></i></div>
+            <div>
+              <span class="dash-stat-num">$35</span>
+              <span class="dash-stat-label">Monthly Spend</span>
+            </div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="dash-stat-icon purple"><i class="fas fa-clock"></i></div>
+            <div>
+              <span class="dash-stat-num">99.9%</span>
+              <span class="dash-stat-label">Avg. Uptime</span>
+            </div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="dash-stat-icon orange"><i class="fas fa-ticket-alt"></i></div>
+            <div>
+              <span class="dash-stat-num">0</span>
+              <span class="dash-stat-label">Open Tickets</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SERVERS QUICK VIEW -->
+        <div class="dash-grid-2">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3>My Servers</h3>
+              <a href="#" class="dash-card-link" onclick="switchPanel('servers')">View all</a>
+            </div>
+            <div class="dash-servers-list">
+              <div class="dash-server-row">
+                <div class="dash-server-row-left">
+                  <span class="dash-status-dot green"></span>
+                  <div>
+                    <strong>VPS-PRO-001</strong>
+                    <span>Frankfurt, DE · 185.23.41.12</span>
+                  </div>
+                </div>
+                <div class="dash-server-row-right">
+                  <div class="dash-mini-bar-wrap">
+                    <span>CPU</span>
+                    <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:72%;background:var(--primary-light)"></div></div>
+                    <span>72%</span>
+                  </div>
+                  <div class="dash-mini-bar-wrap">
+                    <span>RAM</span>
+                    <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:45%;background:#c084fc"></div></div>
+                    <span>45%</span>
+                  </div>
+                  <span class="dash-badge-status running">Running</span>
+                </div>
+              </div>
+              <div class="dash-server-row">
+                <div class="dash-server-row-left">
+                  <span class="dash-status-dot green"></span>
+                  <div>
+                    <strong>VPS-PRO-002</strong>
+                    <span>New York, US · 45.82.130.5</span>
+                  </div>
+                </div>
+                <div class="dash-server-row-right">
+                  <div class="dash-mini-bar-wrap">
+                    <span>CPU</span>
+                    <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:38%;background:var(--primary-light)"></div></div>
+                    <span>38%</span>
+                  </div>
+                  <div class="dash-mini-bar-wrap">
+                    <span>RAM</span>
+                    <div class="dash-mini-bar"><div class="dash-mini-fill" style="width:60%;background:#c084fc"></div></div>
+                    <span>60%</span>
+                  </div>
+                  <span class="dash-badge-status running">Running</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3>Recent Activity</h3>
+            </div>
+            <ul class="dash-activity-list">
+              <li><span class="dash-act-icon green"><i class="fas fa-check"></i></span><div><strong>Server deployed</strong><span>VPS-PRO-002 · New York</span></div><time>2h ago</time></li>
+              <li><span class="dash-act-icon blue"><i class="fas fa-credit-card"></i></span><div><strong>Invoice paid</strong><span>$35.00 · Pro Plan</span></div><time>1d ago</time></li>
+              <li><span class="dash-act-icon purple"><i class="fas fa-redo"></i></span><div><strong>Server restarted</strong><span>VPS-PRO-001 · Frankfurt</span></div><time>3d ago</time></li>
+              <li><span class="dash-act-icon orange"><i class="fas fa-user-plus"></i></span><div><strong>Account created</strong><span>Welcome to DSCVPS!</span></div><time>3d ago</time></li>
+            </ul>
+          </div>
+
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <h3>Current Plan</h3>
+              <a href="#plans" class="dash-card-link" onclick="window.location='index.html#plans'">Upgrade</a>
+            </div>
+            <div class="dash-plan-info">
+              <div class="dash-plan-icon"><i class="fas fa-rocket"></i></div>
+              <div>
+                <h4 id="dashPlanName">Pro Plan</h4>
+                <p>4 vCPU · 8 GB RAM · 160 GB NVMe · 4 TB BW</p>
+              </div>
+              <span class="dash-badge-status running">Active</span>
+            </div>
+            <div class="dash-plan-bar-row">
+              <span>Servers used</span>
+              <div class="dash-plan-bar-bg"><div class="dash-plan-bar-fill" style="width:40%"></div></div>
+              <span>2 / 5</span>
+            </div>
+            <div class="dash-plan-bar-row">
+              <span>Bandwidth</span>
+              <div class="dash-plan-bar-bg"><div class="dash-plan-bar-fill" style="width:25%;background:#c084fc"></div></div>
+              <span>1 TB / 4 TB</span>
+            </div>
+            <div class="dash-plan-bar-row">
+              <span>Storage</span>
+              <div class="dash-plan-bar-bg"><div class="dash-plan-bar-fill" style="width:55%;background:var(--cyan)"></div></div>
+              <span>88 GB / 160 GB</span>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div class="dash-card-header"><h3>Quick Actions</h3></div>
+            <div class="dash-quick-actions">
+              <button class="dash-action-btn" onclick="showToast('Deploying new server...','info')">
+                <i class="fas fa-plus"></i>
+                <span>New Server</span>
+              </button>
+              <button class="dash-action-btn" onclick="switchPanel('billing')">
+                <i class="fas fa-file-invoice"></i>
+                <span>Invoices</span>
+              </button>
+              <button class="dash-action-btn" onclick="switchPanel('support')">
+                <i class="fas fa-headset"></i>
+                <span>Support</span>
+              </button>
+              <button class="dash-action-btn" onclick="switchPanel('profile')">
+                <i class="fas fa-user-cog"></i>
+                <span>Profile</span>
+              </button>
+              <button class="dash-action-btn" onclick="showToast('Creating snapshot...','success')">
+                <i class="fas fa-camera"></i>
+                <span>Snapshot</span>
+              </button>
+              <button class="dash-action-btn" onclick="showToast('Opening console...','info')">
+                <i class="fas fa-terminal"></i>
+                <span>Console</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SERVERS ===== -->
+      <section class="dash-panel" id="panel-servers">
+        <div class="dash-panel-title">
+          <h2>My Servers</h2>
+          <button class="btn btn-primary btn-sm" onclick="showToast('Server deployment coming soon','info')">
+            <i class="fas fa-plus"></i> Deploy Server
+          </button>
+        </div>
+        <div class="dash-servers-grid" id="dashServersGrid"></div>
+      </section>
+
+      <!-- ===== BILLING ===== -->
+      <section class="dash-panel" id="panel-billing">
+        <div class="dash-panel-title">
+          <h2>Billing & Invoices</h2>
+          <button class="btn btn-outline btn-sm" onclick="showToast('Downloading invoices...','success')">
+            <i class="fas fa-download"></i> Export All
+          </button>
+        </div>
+        <div class="dash-billing-stats">
+          <div class="dash-stat-card">
+            <div class="dash-stat-icon green"><i class="fas fa-dollar-sign"></i></div>
+            <div><span class="dash-stat-num">$35</span><span class="dash-stat-label">This Month</span></div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="dash-stat-icon blue"><i class="fas fa-history"></i></div>
+            <div><span class="dash-stat-num">$245</span><span class="dash-stat-label">Total Paid</span></div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="dash-stat-icon orange"><i class="fas fa-calendar-alt"></i></div>
+            <div><span class="dash-stat-num">Oct 1</span><span class="dash-stat-label">Next Invoice</span></div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>Invoice History</h3></div>
+          <div class="dash-table-wrap">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Invoice</th>
+                  <th>Plan</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="dashInvoicesBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SUPPORT ===== -->
+      <section class="dash-panel" id="panel-support">
+        <div class="dash-panel-title">
+          <h2>Support</h2>
+          <button class="btn btn-primary btn-sm" id="openTicketBtn">
+            <i class="fas fa-plus"></i> Open Ticket
+          </button>
+        </div>
+
+        <!-- NEW TICKET FORM -->
+        <div class="dash-card" id="newTicketForm" style="display:none;margin-bottom:24px">
+          <div class="dash-card-header">
+            <h3>New Support Ticket</h3>
+            <button class="dash-close-btn" id="closeTicketForm"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="dash-form-body">
+            <div class="dash-form-group">
+              <label>Subject</label>
+              <input type="text" class="dash-input" id="ticketSubject" placeholder="Brief description of your issue..." />
+            </div>
+            <div class="dash-form-group">
+              <label>Priority</label>
+              <select class="dash-select" id="ticketPriority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <div class="dash-form-group">
+              <label>Message</label>
+              <textarea class="dash-textarea" id="ticketMessage" rows="4" placeholder="Describe your issue in detail..."></textarea>
+            </div>
+            <button class="btn btn-primary btn-sm" id="submitTicketBtn">
+              <i class="fas fa-paper-plane"></i> Submit Ticket
+            </button>
+          </div>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-header"><h3>My Tickets</h3></div>
+          <div class="dash-tickets-list" id="dashTicketsList"></div>
+        </div>
+      </section>
+
+      <!-- ===== PROFILE ===== -->
+      <section class="dash-panel" id="panel-profile">
+        <div class="dash-panel-title"><h2>My Profile</h2></div>
+        <div class="dash-profile-grid">
+
+          <div class="dash-card">
+            <div class="dash-card-header"><h3><i class="fas fa-user"></i> Personal Info</h3></div>
+            <div class="dash-form-body">
+              <div class="dash-profile-avatar-row">
+                <div class="dash-avatar xl" id="profileAvatar">JD</div>
+                <div>
+                  <h4 id="profileFullName">John Doe</h4>
+                  <span id="profileEmail">john@example.com</span>
+                </div>
+              </div>
+              <div class="dash-form-group">
+                <label>First Name</label>
+                <input type="text" class="dash-input" id="profileFirstName" placeholder="First name" />
+              </div>
+              <div class="dash-form-group">
+                <label>Last Name</label>
+                <input type="text" class="dash-input" id="profileLastName" placeholder="Last name" />
+              </div>
+              <div class="dash-form-group">
+                <label>Email</label>
+                <input type="email" class="dash-input" id="profileEmailInput" placeholder="your@email.com" />
+              </div>
+              <div class="dash-form-group">
+                <label>Company <span style="color:var(--text-dim);font-size:0.75rem">(optional)</span></label>
+                <input type="text" class="dash-input" placeholder="Your company name" />
+              </div>
+              <button class="btn btn-primary btn-sm" id="saveProfileBtn"><i class="fas fa-save"></i> Save Changes</button>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div class="dash-card-header"><h3><i class="fas fa-lock"></i> Change Password</h3></div>
+            <div class="dash-form-body">
+              <div class="dash-form-group">
+                <label>Current Password</label>
+                <input type="password" class="dash-input" placeholder="••••••••" />
+              </div>
+              <div class="dash-form-group">
+                <label>New Password</label>
+                <input type="password" class="dash-input" placeholder="Min. 8 characters" />
+              </div>
+              <div class="dash-form-group">
+                <label>Confirm New Password</label>
+                <input type="password" class="dash-input" placeholder="Repeat new password" />
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="showToast('Password updated successfully','success')"><i class="fas fa-key"></i> Update Password</button>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div class="dash-card-header"><h3><i class="fas fa-shield-alt"></i> Security</h3></div>
+            <div class="dash-form-body">
+              <div class="dash-security-row"><span>Two-Factor Authentication</span><label class="dash-toggle"><input type="checkbox" /><span class="dash-slider"></span></label></div>
+              <div class="dash-security-row"><span>Login Email Alerts</span><label class="dash-toggle"><input type="checkbox" checked /><span class="dash-slider"></span></label></div>
+              <div class="dash-security-row"><span>API Access</span><label class="dash-toggle"><input type="checkbox" /><span class="dash-slider"></span></label></div>
+              <div class="dash-form-group" style="margin-top:16px">
+                <label>API Key</label>
+                <div class="dash-api-wrap">
+                  <input type="password" class="dash-input" value="sk_user_dscvps_abc123xyz" readonly id="userApiKey" />
+                  <button class="dash-copy-btn" onclick="copyUserKey()"><i class="fas fa-copy"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div class="dash-card-header"><h3><i class="fas fa-bell"></i> Notifications</h3></div>
+            <div class="dash-form-body">
+              <div class="dash-security-row"><span>Server alerts</span><label class="dash-toggle"><input type="checkbox" checked /><span class="dash-slider"></span></label></div>
+              <div class="dash-security-row"><span>Billing reminders</span><label class="dash-toggle"><input type="checkbox" checked /><span class="dash-slider"></span></label></div>
+              <div class="dash-security-row"><span>Maintenance notices</span><label class="dash-toggle"><input type="checkbox" checked /><span class="dash-slider"></span></label></div>
+              <div class="dash-security-row"><span>Newsletter</span><label class="dash-toggle"><input type="checkbox" /><span class="dash-slider"></span></label></div>
+              <button class="btn btn-primary btn-sm" style="margin-top:16px" onclick="showToast('Notification preferences saved','success')"><i class="fas fa-save"></i> Save</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="dash-toast-container" id="dashToastContainer"></div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

@@ -171,9 +171,21 @@ joinForm.addEventListener('submit', function (e) {
     signup_date:   signupDate,
   };
 
-  emailjs.send('service_wf9z4nx', 'template_rvvrbpq', templateParams)
+emailjs.send('service_wf9z4nx', 'template_rvvrbpq', templateParams)
     .then(function (response) {
       console.log('EmailJS OK', response.status, response.text);
+
+      // Save user data to localStorage
+      const userData = {
+        firstName: firstName,
+        lastName:  lastName,
+        email:     email,
+        password:  password,    // <-- added
+        plan:      plan,
+        joinedAt:  new Date().toISOString()
+      };
+      localStorage.setItem('dscvps_user', JSON.stringify(userData));
+
       joinBtnText.style.display  = 'inline-flex';
       joinBtnLoader.style.display = 'none';
       joinBtn.disabled = false;
@@ -182,9 +194,10 @@ joinForm.addEventListener('submit', function (e) {
       bars.forEach(b => b.className = 'pw-bar');
       pwLabel.textContent = 'Enter a password';
       pwLabel.style.color = 'var(--text-dim)';
+
       setTimeout(function () {
-        window.location.href = 'login.html';
-      }, 2500);
+        window.location.href = 'dashboard.html';
+      }, 2000);
     })
     .catch(function (error) {
       console.error('EmailJS error:', error);
