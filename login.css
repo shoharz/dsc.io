@@ -1,8 +1,7 @@
 /* ===== AUTH LAYOUT ===== */
 .auth-body {
   min-height: 100vh;
-  display: flex;
-  align-items: stretch;
+  display: block;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
@@ -38,6 +37,7 @@
   min-height: 100vh;
   position: relative;
   z-index: 1;
+  align-items: flex-start;
 }
 
 /* ===== LEFT PANEL ===== */
