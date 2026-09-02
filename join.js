@@ -104,21 +104,18 @@ document.getElementById('confirmPassword').addEventListener('input', function ()
   }
 });
 
-// ===== EMAILJS INIT =====
-emailjs.init('c4O8C8MBJ_rzRlNfJ');
-
 // ===== FORM SUBMIT =====
-const joinForm = document.getElementById('joinForm');
-const joinBtn = document.getElementById('joinBtn');
-const joinBtnText = document.getElementById('joinBtnText');
-const joinBtnLoader = document.getElementById('joinBtnLoader');
-const joinError = document.getElementById('joinError');
+const joinForm     = document.getElementById('joinForm');
+const joinBtn      = document.getElementById('joinBtn');
+const joinBtnText  = document.getElementById('joinBtnText');
+const joinBtnLoader= document.getElementById('joinBtnLoader');
+const joinError    = document.getElementById('joinError');
 const joinErrorMsg = document.getElementById('joinErrorMsg');
-const joinSuccess = document.getElementById('joinSuccess');
+const joinSuccess  = document.getElementById('joinSuccess');
 
-joinForm.addEventListener('submit', (e) => {
+joinForm.addEventListener('submit', function (e) {
   e.preventDefault();
-  joinError.style.display = 'none';
+  joinError.style.display  = 'none';
   joinSuccess.style.display = 'none';
 
   const firstName = document.getElementById('firstName').value.trim();
@@ -126,7 +123,8 @@ joinForm.addEventListener('submit', (e) => {
   const email     = document.getElementById('email').value.trim();
   const password  = passwordInput.value;
   const confirmPw = document.getElementById('confirmPassword').value;
-  const plan      = document.getElementById('plan').value || 'Not selected';
+  const planEl    = document.getElementById('plan');
+  const plan      = planEl.options[planEl.selectedIndex].text || 'Not selected';
   const terms     = document.getElementById('agreeTerms').checked;
 
   let valid = true;
@@ -155,7 +153,7 @@ joinForm.addEventListener('submit', (e) => {
 
   if (!valid) return;
 
-  joinBtnText.style.display = 'none';
+  joinBtnText.style.display  = 'none';
   joinBtnLoader.style.display = 'inline-flex';
   joinBtn.disabled = true;
 
@@ -174,8 +172,9 @@ joinForm.addEventListener('submit', (e) => {
   };
 
   emailjs.send('service_wf9z4nx', 'template_rvvrbpq', templateParams)
-    .then(() => {
-      joinBtnText.style.display = 'inline-flex';
+    .then(function (response) {
+      console.log('EmailJS OK', response.status, response.text);
+      joinBtnText.style.display  = 'inline-flex';
       joinBtnLoader.style.display = 'none';
       joinBtn.disabled = false;
       joinSuccess.style.display = 'flex';
@@ -183,15 +182,16 @@ joinForm.addEventListener('submit', (e) => {
       bars.forEach(b => b.className = 'pw-bar');
       pwLabel.textContent = 'Enter a password';
       pwLabel.style.color = 'var(--text-dim)';
-      setTimeout(() => {
+      setTimeout(function () {
         window.location.href = 'login.html';
       }, 2500);
     })
-    .catch(() => {
-      joinBtnText.style.display = 'inline-flex';
+    .catch(function (error) {
+      console.error('EmailJS error:', error);
+      joinBtnText.style.display  = 'inline-flex';
       joinBtnLoader.style.display = 'none';
       joinBtn.disabled = false;
-      joinErrorMsg.textContent = 'Failed to send registration. Please try again.';
+      joinErrorMsg.textContent = 'Failed to send: ' + (error.text || error.message || JSON.stringify(error));
       joinError.style.display = 'flex';
     });
 });
