@@ -209,7 +209,6 @@ emailjs.send('service_wf9z4nx', 'template_rvvrbpq', templateParams)
     });
 });
 
-// ===== SOCIAL BUTTONS =====
 function showToast(msg) {
   const existing = document.querySelector('.toast');
   if (existing) existing.remove();
@@ -224,5 +223,52 @@ function showToast(msg) {
   }, 3000);
 }
 
-document.getElementById('googleBtn').addEventListener('click', () => showToast('Google OAuth is not connected yet.'));
+// ===== GOOGLE OAUTH =====
+const GOOGLE_CLIENT_ID = '322223154536-g16pps91s35486mti2qp5943g00rtr1r.apps.googleusercontent.com';
+
+function handleGoogleResponse(response) {
+  const base64Url = response.credential.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+  
+  const payload = JSON.parse(jsonPayload);
+  const email = payload.email;
+  const firstName = payload.given_name || '';
+  const lastName = payload.family_name || '';
+
+  // Save as a new user
+  localStorage.setItem('dscvps_user', JSON.stringify({
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    password: 'google_oauth_user',
+    plan: 'Starter Plan',
+    joinedAt: new Date().toISOString()
+  }));
+
+  localStorage.setItem('dscvps_loggedIn', 'true');
+  localStorage.setItem('dscvps_user_email', email);
+  
+  window.location.href = 'dashboard.html';
+}
+
+window.addEventListener('load', function() {
+  if (window.google) {
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: handleGoogleResponse
+    });
+  }
+});
+
+document.getElementById('googleBtn').addEventListener('click', () => {
+  if (GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com') {
+    showToast('Setup required: Add Google Client ID in join.js');
+    return;
+  }
+  google.accounts.id.prompt(); 
+});
+
 document.getElementById('githubBtn').addEventListener('click', () => showToast('GitHub OAuth is not connected yet.'));

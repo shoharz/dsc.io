@@ -115,12 +115,65 @@ loginForm.addEventListener('submit', (e) => {
   }, 1800);
 });
 
-// ===== SOCIAL BUTTONS =====
+// ===== GOOGLE OAUTH =====
+// Note: To use this in production, replace YOUR_GOOGLE_CLIENT_ID with a real Client ID from Google Cloud Console
+const GOOGLE_CLIENT_ID = '322223154536-g16pps91s35486mti2qp5943g00rtr1r.apps.googleusercontent.com';
+
+function handleGoogleResponse(response) {
+  // Decode the JWT token returned by Google
+  const base64Url = response.credential.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
+  
+  const payload = JSON.parse(jsonPayload);
+  
+  // payload contains: email, given_name, family_name, picture
+  const email = payload.email;
+  const firstName = payload.given_name || '';
+  const lastName = payload.family_name || '';
+  
+  const storedUser = JSON.parse(localStorage.getItem('dscvps_user') || '{}');
+  
+  // Log them in
+  localStorage.setItem('dscvps_loggedIn', 'true');
+  localStorage.setItem('dscvps_user_email', email);
+  
+  // If they don't have an account yet, create a basic one
+  if (!storedUser.email) {
+    localStorage.setItem('dscvps_user', JSON.stringify({
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: 'google_oauth_user', // placeholder
+      plan: 'Starter Plan',
+      joinedAt: new Date().toISOString()
+    }));
+  }
+  
+  window.location.href = 'dashboard.html';
+}
+
+window.onload = function() {
+  if (window.google) {
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: handleGoogleResponse
+    });
+  }
+};
+
 document.getElementById('googleBtn').addEventListener('click', () => {
-  showSocialToast('Google');
+  if (GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com') {
+    showSocialToast('Setup required: Add Google Client ID in login.js');
+    return;
+  }
+  google.accounts.id.prompt(); // Shows the One Tap UI
 });
+
 document.getElementById('githubBtn').addEventListener('click', () => {
-  showSocialToast('GitHub');
+  showSocialToast('GitHub OAuth is not connected yet.');
 });
 
 function showSocialToast(provider) {
